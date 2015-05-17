@@ -1,0 +1,22 @@
+{
+    "name": "emgag/flysystem-tempdir",
+    "description": "Flysystem adapter for a self-destroying temporary directory",
+    "require": {
+        "league/flysystem": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.6.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Blaser",
+            "email": "git@mooch.ch"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+	     "Emgag\\Flysystem\\": "src/"
+	}
+    }
+}
