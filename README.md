@@ -1,5 +1,7 @@
 # Flysystem Adapter for Temporary Directory
 
+[![Build Status](https://img.shields.io/travis/emgag/flysystem-tempdir/master.svg?style=flat-square)](https://travis-ci.org/emgag/flysystem-tempdir)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 
 ## Installation
