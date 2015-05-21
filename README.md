@@ -6,7 +6,7 @@
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
 
 An adapter for the [Flysystem](https://github.com/thephpleague/flysystem) file 
-system abstraction library which creates a temporary director on local filesystem
+system abstraction library which creates a temporary directory on local filesystem
 and which is automatically removed again on object destruct.
 
 ## Installation
