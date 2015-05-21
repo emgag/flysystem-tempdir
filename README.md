@@ -5,6 +5,9 @@
 [![Packagist Version](https://img.shields.io/packagist/v/emgag/flysystem-tempdir.svg?style=flat-square)](https://packagist.org/packages/emgag/flysystem-tempdir)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
 
+An adapter for the [Flysystem](https://github.com/thephpleague/flysystem) file 
+system abstraction library which creates a temporary director on local filesystem
+and which is automatically removed again on object destruct.
 
 ## Installation
 
@@ -20,6 +23,8 @@ As League\Flysystem\Filesystem wrapper:
 ```php
 use Emgag\Flysystem\Tempdir;
 $fs = new Tempdir([$prefix],[$tempdir]);
+// fully qualified FS path
+$fsPath = $fs->getPath();
 ```
 
 
@@ -33,3 +38,8 @@ $adapter = new TempdirAdapter([$prefix],[$tempdir]);
 
 $filesystem = new Filesystem($adapter);
 ```
+
+## License
+
+flysystem-tempdir is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+
