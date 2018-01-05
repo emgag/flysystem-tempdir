@@ -2,8 +2,9 @@
 
 
 use Emgag\Flysystem\Tempdir;
+use PHPUnit\Framework\TestCase;
 
-class TempdirTest extends PHPUnit_Framework_TestCase
+class TempdirTest extends TestCase
 {
 
     public function testCreateAndDestroy()

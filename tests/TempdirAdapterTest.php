@@ -3,8 +3,9 @@
 
 use Emgag\Flysystem\TempdirAdapter as Tempdir;
 use League\Flysystem\Filesystem;
+use PHPUnit\Framework\TestCase;
 
-class TempdirAdapterTest extends PHPUnit_Framework_TestCase
+class TempdirAdapterTest extends TestCase
 {
 
     /**
