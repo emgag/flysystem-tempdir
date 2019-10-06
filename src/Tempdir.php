@@ -24,6 +24,9 @@ class Tempdir extends Filesystem
      */
     public function getPath()
     {
-        return $this->getAdapter()->getPathPrefix();
+        /** @var TempdirAdapter $adapter */
+        $adapter = $this->getAdapter();
+
+        return $adapter->getPathPrefix();
     }
 }
