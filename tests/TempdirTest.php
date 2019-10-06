@@ -1,15 +1,12 @@
 <?php
 
-
 use Emgag\Flysystem\Tempdir;
 use PHPUnit\Framework\TestCase;
 
 class TempdirTest extends TestCase
 {
-
     public function testCreateAndDestroy()
     {
-
         $fs  = new Tempdir();
         $dir = $fs->getPath();
 
@@ -19,6 +16,4 @@ class TempdirTest extends TestCase
 
         $this->assertTrue(!file_exists($dir));
     }
-
-
 }

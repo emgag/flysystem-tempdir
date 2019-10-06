@@ -7,9 +7,8 @@ use League\Flysystem\Filesystem;
 
 class TempdirAdapter extends Local
 {
-
     /**
-     * Creates a temporary directory
+     * Creates a temporary directory.
      *
      * @param string $prefix
      * @param null   $dir
@@ -31,7 +30,7 @@ class TempdirAdapter extends Local
                 break;
             }
 
-            $maxTries--;
+            --$maxTries;
         } while ($maxTries > 0);
 
         if ($maxTries == 0) {
@@ -41,9 +40,8 @@ class TempdirAdapter extends Local
         parent::__construct($path);
     }
 
-
     /**
-     * Removes temporary directory
+     * Removes temporary directory.
      *
      * @throws \League\Flysystem\FileExistsException
      */
@@ -53,6 +51,4 @@ class TempdirAdapter extends Local
         $fs->deleteDir(basename($this->getPathPrefix()));
         $fs->assertAbsent($this->getPathPrefix());
     }
-
-
 }

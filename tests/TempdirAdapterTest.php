@@ -1,13 +1,11 @@
 <?php
 
-
 use Emgag\Flysystem\TempdirAdapter as Tempdir;
 use League\Flysystem\Filesystem;
 use PHPUnit\Framework\TestCase;
 
 class TempdirAdapterTest extends TestCase
 {
-
     /**
      * @dataProvider adapterProvider
      */
@@ -16,7 +14,6 @@ class TempdirAdapterTest extends TestCase
         $dir = $adapter->getPathPrefix();
         $this->assertTrue(is_dir($dir));
     }
-
 
     public function testIsRemoved()
     {
@@ -28,7 +25,6 @@ class TempdirAdapterTest extends TestCase
         $this->assertTrue(!file_exists($dir));
     }
 
-
     public function adapterProvider()
     {
         $adapter    = new Tempdir();
@@ -38,6 +34,4 @@ class TempdirAdapterTest extends TestCase
             [$filesystem, $adapter],
         ];
     }
-
-
 }

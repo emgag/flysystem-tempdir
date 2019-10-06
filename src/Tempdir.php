@@ -6,9 +6,8 @@ use League\Flysystem\Filesystem;
 
 class Tempdir extends Filesystem
 {
-
     /**
-     * Creates a temporary directory
+     * Creates a temporary directory.
      *
      * @param string $prefix
      * @param null   $dir
@@ -19,7 +18,7 @@ class Tempdir extends Filesystem
     }
 
     /**
-     * Returns fully qualified filesystem path for temp directory
+     * Returns fully qualified filesystem path for temp directory.
      *
      * @return string
      */
@@ -27,6 +26,4 @@ class Tempdir extends Filesystem
     {
         return $this->getAdapter()->getPathPrefix();
     }
-
-
 }
