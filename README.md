@@ -1,5 +1,6 @@
 # Flysystem Adapter for Temporary Directory
 
+![build](https://github.com/emgag/flysystem-tempdir/workflows/build/badge.svg)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Packagist Version](https://img.shields.io/packagist/v/emgag/flysystem-tempdir.svg)](https://packagist.org/packages/emgag/flysystem-tempdir)
 
