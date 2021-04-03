@@ -7,14 +7,21 @@ use League\Flysystem\Filesystem;
 class Tempdir extends Filesystem
 {
     /**
+     * @var TempdirAdapter
+     */
+    private $adapter;
+
+    /**
      * Creates a temporary directory.
      *
      * @param string $prefix
      * @param null   $dir
+     * @param bool   $destruct
      */
-    public function __construct($prefix = '', $dir = null)
+    public function __construct($prefix = '', $dir = null, $destruct = true)
     {
-        parent::__construct(new TempdirAdapter($prefix, $dir));
+        $this->adapter = new TempdirAdapter($prefix, $dir, $destruct);
+        parent::__construct($this->adapter);
     }
 
     /**
@@ -24,9 +31,6 @@ class Tempdir extends Filesystem
      */
     public function getPath()
     {
-        /** @var TempdirAdapter $adapter */
-        $adapter = $this->getAdapter();
-
-        return $adapter->getPathPrefix();
+        return $this->adapter->getPath();
     }
 }

@@ -21,11 +21,10 @@ As League\Flysystem\Filesystem wrapper:
 
 ```php
 use Emgag\Flysystem\Tempdir;
-$fs = new Tempdir([$prefix],[$tempdir]);
+$fs = new Tempdir($prefix = '', $tempdir = null, $destruct = true);
 // fully qualified FS path
 $fsPath = $fs->getPath();
 ```
-
 
 or as Flysystem Adapter:
 
@@ -33,9 +32,12 @@ or as Flysystem Adapter:
 use Emgag\Flysystem\TempdirAdapter;
 use League\Flysystem\Filesystem;
 
-$adapter = new TempdirAdapter([$prefix],[$tempdir]);
+$adapter = new TempdirAdapter($prefix = '', $tempdir = null, $destruct = true);
 
 $filesystem = new Filesystem($adapter);
+// fully qualified FS path
+$fsPath = $adapter->getPath();
+
 ```
 
 ## License

@@ -2,29 +2,52 @@
 
 namespace Emgag\Flysystem;
 
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use League\Flysystem\UnableToCreateDirectory;
+use League\Flysystem\UnableToDeleteDirectory;
 
-class TempdirAdapter extends Local
+class TempdirAdapter extends LocalFilesystemAdapter
 {
+    /**
+     * @var string
+     */
+    private $path;
+
+    /**
+     * @var string
+     */
+    private $prefix;
+
+    /**
+     * @var string|null
+     */
+    private $dir;
+
+    /**
+     * @var bool
+     */
+    private $destruct;
+
     /**
      * Creates a temporary directory.
      *
      * @param string $prefix
      * @param null   $dir
+     * @param bool   $destruct
      */
-    public function __construct($prefix = '', $dir = null)
+    public function __construct($prefix = '', $dir = null, $destruct = true)
     {
         $maxTries = 1024;
 
         if (empty($dir)) {
             $dir = sys_get_temp_dir();
         } else {
-            $dir = rtrim($dir, $this->pathSeparator);
+            $dir = rtrim($dir, DIRECTORY_SEPARATOR);
         }
 
         do {
-            $path = $dir . $this->pathSeparator . uniqid($prefix, true);
+            $path = $dir . DIRECTORY_SEPARATOR . uniqid($prefix, true);
 
             if (!file_exists($path) && mkdir($path, 0700)) {
                 break;
@@ -34,21 +57,41 @@ class TempdirAdapter extends Local
         } while ($maxTries > 0);
 
         if ($maxTries == 0) {
-            throw new \RuntimeException("Couldn't create temporary directory, giving up");
+            throw new UnableToCreateDirectory("Couldn't create temporary directory, giving up");
         }
+
+        $this->path     = $path;
+        $this->prefix   = $prefix;
+        $this->dir      = $dir;
+        $this->destruct = $destruct;
 
         parent::__construct($path);
     }
 
     /**
-     * Removes temporary directory.
+     * Returns filesystem path to temporary directory.
      *
-     * @throws \League\Flysystem\FileExistsException
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Removes temporary directory.
      */
     public function __destruct()
     {
-        $fs = new Filesystem(new Local(dirname($this->getPathPrefix())));
-        $fs->deleteDir(basename($this->getPathPrefix()));
-        $fs->assertAbsent($this->getPathPrefix());
+        if (!$this->destruct) {
+            return;
+        }
+
+        $fs = new Filesystem(new LocalFilesystemAdapter(dirname($this->path)));
+        $fs->deleteDirectory(basename($this->path));
+
+        if ($fs->fileExists(basename($this->path))) {
+            throw new UnableToDeleteDirectory(sprintf('Unable to remove directory %s', $this->path));
+        }
     }
 }

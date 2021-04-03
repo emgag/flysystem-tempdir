@@ -10,10 +10,10 @@ class TempdirTest extends TestCase
         $fs  = new Tempdir();
         $dir = $fs->getPath();
 
-        $this->assertTrue(is_dir($dir));
+        self::assertTrue(is_dir($dir));
 
         unset($fs);
 
-        $this->assertTrue(!file_exists($dir));
+        self::assertTrue(!file_exists($dir));
     }
 }

@@ -2,7 +2,7 @@
   "name": "emgag/flysystem-tempdir",
   "description": "Flysystem adapter for a self-destroying temporary directory",
   "require": {
-    "league/flysystem": "^1.0"
+    "league/flysystem": "^2.0"
   },
   "require-dev": {
     "php": "^7.3 || ^8.0",

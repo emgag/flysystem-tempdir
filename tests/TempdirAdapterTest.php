@@ -11,18 +11,18 @@ class TempdirAdapterTest extends TestCase
      */
     public function testHasCreated($filesystem, $adapter)
     {
-        $dir = $adapter->getPathPrefix();
-        $this->assertTrue(is_dir($dir));
+        $dir = $adapter->getPath();
+        self::assertTrue(is_dir($dir));
     }
 
     public function testIsRemoved()
     {
         $adapter    = new Tempdir();
         $filesystem = new Filesystem($adapter);
-        $dir        = $adapter->getPathPrefix();
+        $dir        = $adapter->getPath();
 
         unset($filesystem, $adapter);
-        $this->assertTrue(!file_exists($dir));
+        self::assertTrue(!file_exists($dir));
     }
 
     public function adapterProvider()
