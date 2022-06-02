@@ -9,47 +9,27 @@ use League\Flysystem\UnableToDeleteDirectory;
 
 class TempdirAdapter extends LocalFilesystemAdapter
 {
-    /**
-     * @var string
-     */
-    private $path;
+    private string $path;
 
-    /**
-     * @var string
-     */
-    private $prefix;
+    private string $prefix;
 
-    /**
-     * @var string|null
-     */
-    private $dir;
+    private ?string $dir;
 
-    /**
-     * @var bool
-     */
-    private $destruct;
+    private bool $destruct;
 
     /**
      * Creates a temporary directory.
-     *
-     * @param string $prefix
-     * @param null   $dir
-     * @param bool   $destruct
      */
-    public function __construct($prefix = '', $dir = null, $destruct = true)
+    public function __construct(string $prefix = '', ?string $dir = null, bool $destruct = true)
     {
         $maxTries = 1024;
 
-        if (empty($dir)) {
-            $dir = sys_get_temp_dir();
-        } else {
-            $dir = rtrim($dir, DIRECTORY_SEPARATOR);
-        }
+        $dir = empty($dir) ? sys_get_temp_dir() : rtrim($dir, DIRECTORY_SEPARATOR);
 
         do {
             $path = $dir . DIRECTORY_SEPARATOR . uniqid($prefix, true);
 
-            if (!file_exists($path) && mkdir($path, 0700)) {
+            if (!file_exists($path) && mkdir($path, 0700) && is_dir($path)) {
                 break;
             }
 
@@ -70,10 +50,8 @@ class TempdirAdapter extends LocalFilesystemAdapter
 
     /**
      * Returns filesystem path to temporary directory.
-     *
-     * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
