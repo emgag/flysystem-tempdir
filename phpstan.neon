@@ -1,6 +1,0 @@
-parameters:
-    autoload_directories:
-        - tests/
-    ignoreErrors:
-        - '#should return string but returns string\|null.#'
-        - '#expects string, string\|null given.#'
