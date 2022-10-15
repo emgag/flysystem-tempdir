@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Do not include the following files when creating repo artifacts, e.g. the zip
+/.* export-ignore
+/tests/ export-ignore
+/tools/ export-ignore
+/phpunit.* export-ignore
+/rector.php export-ignore
